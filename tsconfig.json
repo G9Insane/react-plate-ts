@@ -15,5 +15,7 @@
     "noEmit": true,
     "jsx": "react"
   },
-  "include": ["./src"]
+  "allowSyntheticDefaultImports": true,
+  "include": ["src"],
+  "extends": "./tsconfig.paths.json",
 }
