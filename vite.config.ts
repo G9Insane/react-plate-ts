@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
-import { resolve } from 'path'
+import path, { resolve } from 'path'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [reactRefresh()],
   resolve: {
     alias: {
-      '@': resolve(__dirname, 'src') // Set '@' to point to the 'src' directory
+      '@': resolve(path.resolve(), 'src') // Set '@' to point to the 'src' directory
     }
   },
   base: './', // Set the packing path
@@ -23,5 +24,5 @@ export default defineConfig({
     //     rewrite: (path) => path.replace('/api/', '/')
     //   }
     // }
-  },
+  }
 })
