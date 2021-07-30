@@ -63,5 +63,12 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "isolatedModules": false
+      }
+    }
   }
 }
