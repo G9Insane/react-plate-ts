@@ -1,42 +1,50 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import logo from '@/assets/logo.svg'
 import '@/assets/App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+interface Props {
+  text: string
+  action?(): any
+}
+
+function App({ text, action }: Props) {
+  // consg
+  const [number, setNumber] = useState(1)
+  const [lorem, setLorem] = useState('3')
+
+  const handleChange = useCallback(() => {
+    setNumber((a) => {
+      return a === 0 ? 1 : a * 2
+    })
+  }, [number])
+
+  const getName = useCallback(
+    (e: string) => {
+      return `${e} number:${number} lorem:${lorem}`
+    },
+    [number, lorem]
+  )
+
+  const checkName = (e: any) => {
+    setLorem(e.target.value)
+  }
+
+  useEffect(() => {
+    console.log(number)
+    // return console.log("unmount")
+  }, []) // [number] <-- watch number
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Gal + Lang!</p>
-        <p>
-          <button type="button" onClick={() => setCount((e) => e + 1)}>
-            click me: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
+        <input type="text" value={lorem} onChange={checkName} />
+        <button type="button" onClick={handleChange}>
+          {number} {getName(lorem)}
+        </button>
+        <button key="btnLorem" type="button" onClick={action} className="Lorem">
+          Lorem ipsum dolor sit {text}
+        </button>
       </header>
     </div>
   )
