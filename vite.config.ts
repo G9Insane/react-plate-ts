@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
 import reactRefresh from '@vitejs/plugin-react-refresh'
+import reactJsx from 'vite-react-jsx'
 import path, { resolve } from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [reactRefresh()],
+  plugins: [reactRefresh(), reactJsx()],
   resolve: {
     alias: {
       '@': resolve(path.resolve(), 'src') // Set '@' to point to the 'src' directory
